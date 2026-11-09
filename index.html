@@ -47,8 +47,7 @@
   </script>
 
   <style>
-    /* Custom Cute Scrollbar */
-    ::-webkit-scrollbar { height: 8px; width: 8px; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 9999px; }
 
@@ -59,7 +58,6 @@
       box-shadow: 0 16px 38px rgba(0, 0, 0, 0.42), inset 0 0 22px rgba(251, 191, 36, 0.12);
     }
 
-    /* Pulse Mic Recording Effect */
     @keyframes pulse-mic {
       0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
       70% { transform: scale(1.08); box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
@@ -70,16 +68,12 @@
       background: #ef4444 !important;
     }
 
-    /* Floating Mascot Animation */
     @keyframes float-paimon {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-8px) rotate(2deg); }
     }
-    .floating-mascot {
-      animation: float-paimon 3.5s ease-in-out infinite;
-    }
+    .floating-mascot { animation: float-paimon 3.5s ease-in-out infinite; }
 
-    /* Shimmer Gold Text */
     @keyframes text-shimmer {
       0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
@@ -95,7 +89,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-genshin-gold selection:text-slate-900 overflow-x-hidden">
   
-  <!-- Fantasy Landscape Backdrop -->
+  <!-- Backdrop -->
   <div id="backdropContainer" aria-hidden="true" class="fixed inset-0 -z-10 overflow-hidden bg-[#101d35]">
     <div class="absolute inset-0 bg-gradient-to-b from-[#172d50] via-[#273d59] to-[#111827]"></div>
     <div class="absolute inset-0 opacity-60" style="background:radial-gradient(circle at 18% 18%,rgba(255,226,164,.42),transparent 23%),radial-gradient(circle at 82% 22%,rgba(126,190,210,.28),transparent 25%)"></div>
@@ -107,7 +101,6 @@
       <path d="M0 390 170 180 270 300 430 95 610 330 760 155 930 340 1110 125 1280 310 1440 175V700H0Z" fill="url(#mountainA)"/>
       <path d="m0 480 210-170 160 105 190-210 190 190 180-125 180 155 150-120 180 150v245H0Z" fill="url(#mountainB)"/>
       <path d="M0 520 Q220 420 430 510T850 490T1440 470V700H0Z" fill="#142b35"/>
-      <g fill="#d9e8e8" opacity=".55"><path d="m430 95 40 65-42-22-28 26Z"/><path d="m1110 125 42 62-44-20-27 20Z"/><path d="m760 155 40 65-42-20-28 22Z"/></g>
     </svg>
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/15 to-slate-950/85"></div>
   </div>
@@ -116,34 +109,41 @@
   <header class="w-full bg-slate-900/90 border-b-2 border-genshin-gold/50 px-4 py-3 sticky top-0 z-50 backdrop-blur-md flex justify-between items-center shadow-lg">
     <div class="flex items-center space-x-3">
       <div class="w-11 h-11 rounded-full bg-genshin-gold flex items-center justify-center text-slate-950 font-chibi font-bold text-2xl shadow-chibi-glow">
-        <i class="fa-solid fa-brain"></i>
+        <i class="fa-solid fa-sparkles"></i>
       </div>
       <div>
         <h1 class="font-chibi text-xl md:text-2xl font-bold tracking-wide text-genshin-gold">TEYVAT PERSONALITY QUEST</h1>
-        <p class="text-xs text-slate-300 font-semibold">Analyzing Personality Traits • Year 5 English (A1/A2)</p>
+        <p class="text-xs text-slate-300 font-semibold">Analyzing Personality Traits • Year 5 English • A1 Level</p>
       </div>
     </div>
 
-    <!-- Currency, Background & Sound Controls -->
     <div class="flex items-center space-x-2 md:space-x-3">
+      <!-- Infographics Guide Modal Button -->
+      <button onclick="openInfographicsModal()" class="px-3 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 border-2 border-indigo-400 text-white text-xs font-chibi font-bold transition flex items-center gap-1.5 shadow-md">
+        <i class="fa-solid fa-book-open text-amber-300"></i>
+        <span>Infographics Guide</span>
+      </button>
+
+      <!-- Background Upload -->
       <div class="flex items-center gap-1 bg-slate-800/90 border-2 border-amber-400/60 p-1 rounded-full shadow-md">
         <label for="bgImageUpload" class="px-2.5 py-1 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-chibi font-bold cursor-pointer transition flex items-center gap-1 shadow-sm">
           <i class="fa-solid fa-image"></i>
           <span class="hidden sm:inline">Change BG</span>
         </label>
         <input id="bgImageUpload" type="file" accept="image/*" class="hidden" />
-        
-        <button id="resetBgBtn" onclick="resetAppBackground()" class="px-2 py-1 rounded-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-chibi transition flex items-center gap-1" title="Reset Backdrop to Default">
+        <button id="resetBgBtn" onclick="resetAppBackground()" class="px-2 py-1 rounded-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-chibi transition flex items-center gap-1">
           <i class="fa-solid fa-rotate-left"></i>
           <span class="hidden lg:inline">Reset BG</span>
         </button>
       </div>
 
+      <!-- Sound Toggle -->
       <button id="soundBtn" onclick="toggleAudio()" class="px-3 py-1.5 rounded-full bg-slate-800 border-2 border-slate-700 hover:border-genshin-gold text-slate-200 text-xs font-chibi flex items-center gap-2 transition">
         <i id="soundIcon" class="fa-solid fa-volume-high text-genshin-gold"></i>
         <span class="hidden md:inline">Sound ON</span>
       </button>
 
+      <!-- Primogems Score -->
       <div class="flex items-center space-x-2 bg-slate-800 border-2 border-genshin-gold/70 px-4 py-1.5 rounded-full shadow-chibi-glow">
         <i class="fa-solid fa-gem text-cyan-400 text-base"></i>
         <span id="primoDisplay" class="text-base font-chibi font-bold gold-shimmer">0</span>
@@ -154,7 +154,7 @@
   <!-- ================= MAIN CONTENT ================= -->
   <main class="container mx-auto px-4 py-5 flex-grow flex flex-col items-center justify-center max-w-6xl">
 
-    <!-- PAIMON MASCOT INSTRUCTION BOX -->
+    <!-- PAIMON MASCOT GUIDE BOX -->
     <div class="w-full max-w-4xl mb-5 chibi-panel rounded-3xl p-4 md:p-5 flex flex-col md:flex-row items-center gap-4 relative overflow-hidden">
       <div class="relative flex-shrink-0 floating-mascot">
         <div class="w-20 h-20 rounded-full border-4 border-genshin-gold overflow-hidden bg-gradient-to-b from-indigo-900 to-slate-900 flex items-center justify-center shadow-chibi-glow">
@@ -176,10 +176,10 @@
 
       <div class="flex-grow text-center md:text-left">
         <div class="inline-block px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/50 text-genshin-gold font-chibi text-xs font-bold mb-1">
-          TRAIT ANALYSIS TASK
+          ANALYZING PERSONALITY TRAITS
         </div>
         <p id="paimonSpeech" class="text-base text-slate-100 font-chibi leading-relaxed">
-          "Read the story scenario! What is their personality? Speak out loud like: <span class="text-genshin-gold">'She is kind and caring'</span> or <span class="text-genshin-gold">'He is brave and smart'</span>!"
+          "Read the story scenario below! What personality adjectives match their actions? Example: <span class="text-genshin-gold">'She is kind and caring'</span>!"
         </p>
       </div>
     </div>
@@ -187,43 +187,35 @@
     <!-- MAIN GAME WORKSPACE GRID -->
     <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-      <!-- LEFT: Character Scenario & Card Details (5 cols) -->
+      <!-- LEFT: Character Display Card & Story Scenario (5 cols) -->
       <div class="lg:col-span-5 flex flex-col items-center w-full">
+        <div class="flex gap-2 mb-3 w-full overflow-x-auto py-1 px-1 no-scrollbar scroll-smooth" id="characterTabsContainer"></div>
 
-        <!-- 10 Chibi Selector Tabs -->
-        <div class="flex gap-2 mb-3 w-full overflow-x-auto py-1 px-1 no-scrollbar scroll-smooth" id="characterTabsContainer">
-          <!-- Loaded via JS -->
-        </div>
-
-        <!-- Card Frame -->
         <div id="characterCard" class="w-full max-w-sm chibi-panel rounded-3xl p-5 flex flex-col items-center text-center relative transition-all duration-300">
           
-          <div class="w-full flex justify-between items-center mb-2">
-            <span id="charElementBadge" class="px-3 py-1 rounded-full text-xs font-chibi font-bold bg-emerald-600 text-white shadow-md flex items-center gap-1">
+          <div class="w-full flex justify-between items-center mb-3">
+            <span id="charElementBadge" class="px-3 py-1 rounded-full text-xs font-chibi font-bold bg-emerald-500 text-white shadow-md flex items-center gap-1">
               <i class="fa-solid fa-leaf"></i> DENDRO
             </span>
             <div class="flex items-center gap-2">
               <span id="charNation" class="text-xs text-genshin-gold font-chibi font-bold tracking-wider">Sumeru</span>
-              <button onclick="toggleCardEditor()" class="px-2 py-0.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-genshin-gold border border-genshin-gold/50 text-[10px] font-chibi transition" title="Edit character story & details">
-                <i class="fa-solid fa-pen-to-square"></i> Edit Story
+              <button onclick="toggleCardEditor()" class="px-2 py-0.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-genshin-gold border border-genshin-gold/50 text-[10px] font-chibi transition">
+                <i class="fa-solid fa-pen-to-square"></i> Edit Card
               </button>
             </div>
           </div>
 
-          <!-- Character Visual Container -->
-          <div class="relative w-44 h-44 rounded-2xl overflow-hidden mb-3 border-4 border-genshin-gold/60 bg-gradient-to-b from-slate-800 to-slate-900 flex items-center justify-center shadow-inner group">
-            <svg id="charSvg" class="w-full h-full p-2" viewBox="0 0 200 200">
-              <!-- Rendered via JS -->
-            </svg>
-            <img id="characterPhoto" alt="Character" class="hidden absolute inset-0 w-full h-full object-contain bg-slate-900/40 p-2" />
+          <div class="relative w-56 h-56 rounded-2xl overflow-hidden mb-3 border-4 border-genshin-gold/60 bg-gradient-to-b from-slate-800 to-slate-900 flex items-center justify-center shadow-inner">
+            <svg id="charSvg" class="w-full h-full p-2" viewBox="0 0 200 200"></svg>
+            <img id="characterPhoto" alt="Selected character" class="hidden absolute inset-0 w-full h-full object-contain bg-slate-900/40 p-2" />
           </div>
 
           <div class="flex items-center justify-center gap-2 mb-3">
-            <label for="characterImageUpload" class="cursor-pointer px-2.5 py-1.5 rounded-xl bg-slate-800 border border-amber-300/50 text-amber-100 text-[11px] font-chibi hover:bg-slate-700 transition">
-              <i class="fa-solid fa-image mr-1"></i> Upload Photo
+            <label for="characterImageUpload" class="cursor-pointer px-3 py-1.5 rounded-xl bg-slate-800/95 border border-amber-300/50 text-amber-100 text-xs font-chibi hover:bg-slate-700 transition">
+              <i class="fa-solid fa-image mr-1"></i> Upload Picture
             </label>
             <input id="characterImageUpload" type="file" accept="image/*" class="hidden" />
-            <button type="button" id="resetCharacterImage" class="px-2.5 py-1.5 rounded-xl bg-slate-800 border border-slate-600 text-slate-300 text-[11px] font-chibi hover:bg-slate-700 transition">
+            <button type="button" id="resetCharacterImage" class="px-3 py-1.5 rounded-xl bg-slate-800/95 border border-slate-600 text-slate-300 text-xs font-chibi hover:bg-slate-700 transition">
               <i class="fa-solid fa-rotate-left mr-1"></i> Reset
             </button>
           </div>
@@ -231,119 +223,78 @@
           <h2 id="charName" class="font-chibi text-2xl font-bold text-genshin-gold tracking-wide">Nahida</h2>
           <p id="charTitle" class="text-xs text-slate-300 font-semibold mb-3">Lesser Lord Kusanali</p>
 
-          <!-- PROMINENT CHARACTER STORY / SCENARIO BOX -->
-          <div class="w-full bg-slate-900/95 rounded-2xl p-3.5 border-2 border-amber-400/70 text-left mb-3 shadow-md">
-            <p class="text-xs font-chibi font-bold text-genshin-gold mb-1 flex items-center gap-1.5">
-              <i class="fa-solid fa-book-bookmark text-amber-400"></i> CHARACTER STORY SCENARIO:
+          <!-- STORY SCENARIO BOX -->
+          <div class="w-full bg-slate-900/95 rounded-2xl p-4 border-2 border-amber-400/70 text-left mb-3">
+            <p class="text-xs font-chibi font-bold text-genshin-gold mb-1 flex items-center gap-1">
+              <i class="fa-solid fa-book text-amber-400"></i> STORY SCENARIO:
             </p>
-            <p id="charScenarioText" class="text-xs font-chibi text-slate-100 leading-relaxed italic bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
-              "Nahida is a small archon, but she always helps her subjects for them to have a good life."
+            <p id="charScenarioText" class="text-xs font-chibi text-slate-200 leading-relaxed italic">
+              "Nahida is a small archon, but she always helps her subjects so they have a good life."
             </p>
           </div>
 
-          <!-- TARGET PERSONALITY TRAIT CLUES -->
-          <div class="w-full bg-slate-900/90 rounded-2xl p-3 border-2 border-slate-800 text-left">
-            <p class="text-xs font-chibi font-bold text-cyan-300 mb-1.5 flex items-center gap-1">
-              <i class="fa-solid fa-bullseye"></i> TARGET PERSONALITY TRAITS:
-            </p>
-            <div id="traitBadgeContainer" class="flex flex-wrap gap-1.5">
-              <!-- Loaded via JS -->
-            </div>
-          </div>
-
-          <!-- INLINE CARD EDITOR FORM (Hidden by Default) -->
-          <div id="cardEditorForm" class="w-full bg-slate-900/98 border-2 border-amber-400/80 rounded-2xl p-3.5 mt-3 text-left hidden space-y-2.5">
-            <div class="flex justify-between items-center border-b border-slate-700 pb-1.5">
-              <span class="text-xs font-chibi font-bold text-genshin-gold"><i class="fa-solid fa-sliders"></i> EDIT STORY & TRAITS</span>
+          <!-- CARD EDITOR FORM (Hidden by default) -->
+          <div id="cardEditorForm" class="w-full bg-slate-900/95 border-2 border-amber-400/80 rounded-2xl p-3.5 mb-3 text-left hidden space-y-2">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-1">
+              <span class="text-xs font-chibi font-bold text-genshin-gold"><i class="fa-solid fa-sliders"></i> EDIT DETAILS</span>
               <button onclick="toggleCardEditor()" class="text-slate-400 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            
             <div>
-              <label class="text-[10px] font-chibi text-slate-300 block mb-0.5">Character Name:</label>
-              <input type="text" id="editNameInput" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs font-chibi text-slate-100 focus:outline-none focus:border-amber-400" />
+              <label class="text-[10px] font-chibi text-slate-300">Name:</label>
+              <input type="text" id="editNameInput" class="w-full bg-slate-950 border border-slate-700 rounded px-2 py-1 text-xs font-chibi text-slate-100" />
             </div>
-
-            <div class="grid grid-cols-2 gap-2">
-              <div>
-                <label class="text-[10px] font-chibi text-slate-300 block mb-0.5">Title:</label>
-                <input type="text" id="editTitleInput" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs font-chibi text-slate-100 focus:outline-none focus:border-amber-400" />
-              </div>
-              <div>
-                <label class="text-[10px] font-chibi text-slate-300 block mb-0.5">Nation:</label>
-                <input type="text" id="editNationInput" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs font-chibi text-slate-100 focus:outline-none focus:border-amber-400" />
-              </div>
-            </div>
-
             <div>
-              <label class="text-[10px] font-chibi text-slate-300 block mb-0.5">Story / Behavior Scenario:</label>
-              <textarea id="editScenarioInput" rows="2" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs font-chibi text-slate-100 focus:outline-none focus:border-amber-400"></textarea>
+              <label class="text-[10px] font-chibi text-slate-300">Scenario Description:</label>
+              <textarea id="editScenarioInput" rows="2" class="w-full bg-slate-950 border border-slate-700 rounded px-2 py-1 text-xs font-chibi text-slate-100 resize-none"></textarea>
             </div>
-
             <div>
-              <label class="text-[10px] font-chibi text-slate-300 block mb-0.5">Target Personality Adjectives (comma separated):</label>
-              <input type="text" id="editTraitsInput" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs font-chibi text-slate-100 focus:outline-none focus:border-amber-400" />
+              <label class="text-[10px] font-chibi text-slate-300">Target Personality Traits (comma separated):</label>
+              <input type="text" id="editTraitsInput" class="w-full bg-slate-950 border border-slate-700 rounded px-2 py-1 text-xs font-chibi text-slate-100" />
             </div>
+            <button onclick="saveCardEdits()" class="w-full py-1.5 rounded bg-genshin-gold text-slate-950 font-chibi font-bold text-xs">Save Changes</button>
+          </div>
 
-            <button onclick="saveCardEdits()" class="w-full py-1.5 rounded-lg bg-genshin-gold hover:bg-genshin-goldHover text-slate-950 font-chibi font-bold text-xs shadow transition">
-              Save Story Changes
-            </button>
+          <div class="w-full bg-slate-900/90 rounded-2xl p-3 border-2 border-slate-800 text-left">
+            <p class="text-xs font-chibi font-bold text-genshin-gold mb-2 flex items-center gap-1">
+              <i class="fa-solid fa-bullseye text-cyan-400"></i> TARGET TRAITS TO ANALYZE:
+            </p>
+            <div id="traitBadgeContainer" class="flex flex-wrap gap-1.5"></div>
           </div>
 
         </div>
       </div>
 
-      <!-- RIGHT: Interactive Speaking Stage & Trait Analysis (7 cols) -->
+      <!-- RIGHT: Interactive Speaking Stage (7 cols) -->
       <div class="lg:col-span-7 flex flex-col space-y-4 w-full">
 
-        <!-- STEP 1: SENTENCE STARTERS -->
+        <!-- SENTENCE STARTERS -->
         <div class="chibi-panel rounded-3xl p-4">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="font-chibi text-sm font-bold text-genshin-gold flex items-center gap-2">
-              <i class="fa-solid fa-puzzle-piece text-amber-400"></i> STEP 1: SENTENCE STARTER
-            </h3>
-            <span class="text-xs text-slate-400 font-chibi">Tap to add!</span>
-          </div>
-
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            <button onclick="insertStarter('She is ')" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-genshin-gold text-center text-xs font-chibi transition text-amber-300">
-              "She is..."
-            </button>
-            <button onclick="insertStarter('He is ')" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-genshin-gold text-center text-xs font-chibi transition text-amber-300">
-              "He is..."
-            </button>
-            <button onclick="insertStarter('They are ')" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-genshin-gold text-center text-xs font-chibi transition text-amber-300">
-              "They are..."
-            </button>
-            <button onclick="insertStarter('He acts ')" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-genshin-gold text-center text-xs font-chibi transition text-amber-300">
-              "He/She acts..."
-            </button>
-          </div>
-        </div>
-
-        <!-- STEP 2: CATEGORIZED PERSONALITY WORD BANK -->
-        <div class="chibi-panel rounded-3xl p-4 space-y-3">
-          <h3 class="font-chibi text-sm font-bold text-genshin-gold flex items-center gap-2">
-            <i class="fa-solid fa-icons text-cyan-400"></i> STEP 2: PERSONALITY ADJECTIVES
+          <h3 class="font-chibi text-sm font-bold text-genshin-gold mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-puzzle-piece text-amber-400"></i> STEP 1: SENTENCE STARTERS
           </h3>
-
-          <div>
-            <span class="text-[10px] font-chibi text-emerald-400 font-bold block mb-1">POSITIVE TRAITS:</span>
-            <div id="positiveTraitsContainer" class="flex flex-wrap gap-1.5">
-              <!-- Dynamic Pills -->
-            </div>
-          </div>
-
-          <div>
-            <span class="text-[10px] font-chibi text-purple-400 font-bold block mb-1">ACTION & VIRTUE TRAITS:</span>
-            <div id="actionTraitsContainer" class="flex flex-wrap gap-1.5">
-              <!-- Dynamic Pills -->
-            </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <button onclick="insertStarter('She is ')" class="p-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 border-2 border-slate-700 hover:border-genshin-gold text-left text-xs font-chibi transition">
+              <span class="text-amber-400 block font-bold">Female:</span> "She is..."
+            </button>
+            <button onclick="insertStarter('He is ')" class="p-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 border-2 border-slate-700 hover:border-genshin-gold text-left text-xs font-chibi transition">
+              <span class="text-amber-400 block font-bold">Male:</span> "He is..."
+            </button>
+            <button onclick="insertStarter('They are ')" class="p-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 border-2 border-slate-700 hover:border-genshin-gold text-left text-xs font-chibi transition">
+              <span class="text-amber-400 block font-bold">Plural:</span> "They are..."
+            </button>
           </div>
         </div>
 
-        <!-- STEP 3: MICROPHONE & TRANSCRIPT INPUT -->
+        <!-- WORD BANK (A1 Personality Adjectives) -->
+        <div class="chibi-panel rounded-3xl p-4">
+          <h3 class="font-chibi text-sm font-bold text-genshin-gold mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-face-smile text-cyan-400"></i> STEP 2: PERSONALITY WORD BANK (A1)
+          </h3>
+          <div id="wordBankContainer" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <!-- MICROPHONE & TRANSCRIPT AREA -->
         <div class="chibi-panel rounded-3xl p-5 flex flex-col items-center">
-          
           <div class="w-full flex items-center justify-between mb-3">
             <span class="text-xs font-chibi font-bold text-slate-400 uppercase tracking-wider">STEP 3: SPEAK OR TYPE</span>
             <span id="micStatus" class="text-xs px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1.5 font-chibi">
@@ -356,38 +307,32 @@
               <i id="micIcon" class="fa-solid fa-microphone"></i>
             </button>
             <p id="micHelpText" class="text-xs font-chibi text-slate-200 mt-3 font-semibold">
-              Click the Mic button and describe their personality out loud!
+              Click the Mic button and speak loudly!
             </p>
           </div>
 
-          <div class="w-full mt-3">
-            <div class="relative">
-              <textarea id="speechTextInput" rows="2" class="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl p-3 text-base font-chibi text-slate-100 placeholder-slate-500 focus:outline-none focus:border-genshin-gold transition resize-none" placeholder="Spoken analysis shows here (e.g., She is kind and caring)..."></textarea>
-              <button onclick="clearTranscript()" class="absolute right-3 top-3 text-slate-500 hover:text-slate-200 text-xs font-chibi" title="Clear Text">
-                <i class="fa-solid fa-trash-can"></i> Clear
-              </button>
-            </div>
+          <div class="w-full mt-3 relative">
+            <textarea id="speechTextInput" rows="2" class="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl p-3 text-base font-chibi text-slate-100 placeholder-slate-500 focus:outline-none focus:border-genshin-gold transition resize-none" placeholder="Your sentence will show here..."></textarea>
+            <button onclick="clearTranscript()" class="absolute right-3 top-3 text-slate-500 hover:text-slate-200 text-xs font-chibi">
+              <i class="fa-solid fa-trash-can"></i> Clear
+            </button>
           </div>
 
           <button id="evaluateBtn" onclick="evaluateSpeech()" class="mt-4 w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-chibi font-bold text-lg tracking-wide shadow-chibi-glow transition transform active:scale-98 flex items-center justify-center gap-2">
-            <i class="fa-solid fa-circle-check text-xl"></i> CHECK MY TRAIT ANALYSIS!
+            <i class="fa-solid fa-circle-check text-xl"></i> CHECK MY ANSWER!
           </button>
         </div>
 
-        <!-- FEEDBACK & REWARD BANNER -->
+        <!-- FEEDBACK PANEL -->
         <div id="evaluationResultPanel" class="chibi-panel rounded-3xl p-5 hidden transition-all duration-300">
           <h4 class="font-chibi text-base font-bold text-genshin-gold mb-2 flex items-center gap-2">
-            <i class="fa-solid fa-star text-amber-400"></i> PAIMON'S ANALYSIS FEEDBACK:
+            <i class="fa-solid fa-star text-amber-400"></i> PAIMON'S EVALUATION:
           </h4>
 
-          <div id="detectedKeywordsContainer" class="flex flex-wrap gap-2 mb-3">
-            <!-- Detected keywords tags -->
-          </div>
+          <div id="detectedKeywordsContainer" class="flex flex-wrap gap-2 mb-3"></div>
 
           <div class="bg-slate-900/90 rounded-2xl p-3 border-2 border-slate-800 mb-4">
-            <p id="structureFeedback" class="text-sm font-chibi text-slate-200">
-              <!-- Feedback message -->
-            </p>
+            <p id="structureFeedback" class="text-sm font-chibi text-slate-200"></p>
           </div>
 
           <div id="rewardBanner" class="p-3.5 rounded-2xl bg-amber-400/20 border-2 border-amber-400/50 flex items-center justify-between">
@@ -406,10 +351,78 @@
 
       </div>
     </div>
-
   </main>
 
-  <!-- ================= ADVENTURER CERTIFICATE MODAL ================= -->
+  <!-- ================= INFOGRAPHICS HANDBOOK MODAL ================= -->
+  <div id="infographicsModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="chibi-panel rounded-3xl max-w-4xl w-full p-6 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeInfographicsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="text-center mb-4">
+        <div class="inline-block px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/50 text-genshin-gold font-chibi text-xs font-bold mb-1">
+          TEYVAT HANDBOOK
+        </div>
+        <h2 class="font-chibi text-2xl font-bold text-genshin-gold flex items-center justify-center gap-2">
+          <i class="fa-solid fa-book-open"></i> ADJECTIVES INFOGRAPHICS GUIDE
+        </h2>
+        <p class="text-xs text-slate-300 font-chibi">Learn how to describe appearance and personality traits!</p>
+      </div>
+
+      <div class="flex justify-end mb-3">
+        <button onclick="toggleInfographicsEditor()" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-genshin-gold border border-genshin-gold/50 text-xs font-chibi transition">
+          <i class="fa-solid fa-pen-to-square"></i> Edit Infographics Content
+        </button>
+      </div>
+
+      <!-- EDITABLE DUAL CHARTS GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- CHART 1: APPEARANCE ADJECTIVES -->
+        <div class="bg-slate-900/90 rounded-2xl p-4 border-2 border-sky-400/50">
+          <h3 class="font-chibi text-base font-bold text-sky-300 mb-2 border-b border-sky-400/30 pb-1 flex items-center gap-2">
+            <i class="fa-solid fa-eye text-sky-400"></i> APPEARANCE ADJECTIVES
+          </h3>
+          <div id="appearanceChartContent" class="space-y-3 text-xs font-chibi">
+            <!-- Dynamic Content Loaded JS -->
+          </div>
+        </div>
+
+        <!-- CHART 2: PERSONALITY ADJECTIVES -->
+        <div class="bg-slate-900/90 rounded-2xl p-4 border-2 border-amber-400/50">
+          <h3 class="font-chibi text-base font-bold text-genshin-gold mb-2 border-b border-amber-400/30 pb-1 flex items-center gap-2">
+            <i class="fa-solid fa-heart text-amber-400"></i> PERSONALITY ADJECTIVES
+          </h3>
+          <div id="personalityChartContent" class="space-y-3 text-xs font-chibi">
+            <!-- Dynamic Content Loaded JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- INFOGRAPHICS EDIT FORM (Hidden by default) -->
+      <div id="infographicsEditForm" class="mt-4 bg-slate-900/95 border-2 border-amber-400/80 rounded-2xl p-4 text-left hidden space-y-3">
+        <h4 class="text-xs font-chibi font-bold text-genshin-gold flex items-center gap-1">
+          <i class="fa-solid fa-sliders"></i> LIVE INFOGRAPHICS EDITOR
+        </h4>
+        <div>
+          <label class="text-[10px] font-chibi text-slate-300 block mb-1">Appearance Words (Comma separated for Hair/Eyes, Clothes, Colors):</label>
+          <input type="text" id="editAppearanceWordsInput" class="w-full bg-slate-950 border border-slate-700 rounded px-2 py-1 text-xs font-chibi text-slate-100" />
+        </div>
+        <div>
+          <label class="text-[10px] font-chibi text-slate-300 block mb-1">Personality Words (Comma separated for Good Vibes, Helpful, Active):</label>
+          <input type="text" id="editPersonalityWordsInput" class="w-full bg-slate-950 border border-slate-700 rounded px-2 py-1 text-xs font-chibi text-slate-100" />
+        </div>
+        <button onclick="saveInfographicsEdits()" class="w-full py-2 rounded-xl bg-genshin-gold text-slate-950 font-chibi font-bold text-xs">
+          Save Infographics Changes
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= CERTIFICATE MODAL ================= -->
   <div id="reportModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="chibi-panel rounded-3xl max-w-xl w-full p-6 relative">
       <button onclick="closeReportModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
@@ -421,7 +434,7 @@
           <i class="fa-solid fa-award"></i>
         </div>
         <h2 class="font-chibi text-2xl font-bold text-genshin-gold">PERSONALITY QUEST CERTIFICATE</h2>
-        <p class="text-xs text-slate-300 font-chibi">Year 5 English • Analyzing Character Traits</p>
+        <p class="text-xs text-slate-300 font-chibi">Year 5 English • Analyzing Personality Traits</p>
       </div>
 
       <div class="grid grid-cols-2 gap-3 mb-5">
@@ -437,10 +450,10 @@
 
       <div class="bg-slate-900/90 rounded-2xl p-4 border-2 border-slate-800 mb-5 text-center">
         <span id="finalMasteryBadge" class="text-xs font-chibi font-bold px-3 py-1 rounded-full bg-emerald-900 text-emerald-300 border border-emerald-500 inline-block mb-2">
-          Master Analyst!
+          Master Adventurer!
         </span>
         <p id="reportSummaryText" class="text-xs font-chibi text-slate-300 leading-relaxed">
-          You are great at analyzing character behavior and describing personality traits!
+          You are great at analyzing personality traits! You used full sentence starters and accurate adjectives.
         </p>
       </div>
 
@@ -455,23 +468,23 @@
     </div>
   </div>
 
-  <!-- ================= FOOTER ================= -->
+  <!-- FOOTER -->
   <footer class="w-full bg-slate-900/90 border-t-2 border-genshin-gold/40 py-2.5 px-4 backdrop-blur-md flex justify-between items-center text-xs font-chibi text-slate-300">
     <div class="flex items-center space-x-2">
       <i class="fa-solid fa-face-smile text-genshin-gold"></i>
-      <span>EXPEDITION RANK: <strong>Year 5 • Personality Analysis</strong></span>
+      <span>EXPEDITION RANK: <strong>Year 5 • A1 Beginner</strong></span>
     </div>
     <button onclick="openReportModal()" class="px-3 py-1.5 rounded-full bg-genshin-gold/20 border border-genshin-gold text-genshin-gold hover:bg-genshin-gold hover:text-slate-950 font-bold transition">
       <i class="fa-solid fa-certificate mr-1"></i> View Certificate
     </button>
   </footer>
 
-  <!-- ================= GAME SCRIPT ENGINE ================= -->
+  <!-- ================= GAME ENGINE SCRIPT ================= -->
   <script>
     /* ===================================================================
-       1. 10 GENSHIN CHARACTERS WITH PERSONALITY SCENARIOS
+       1. 10 CHIBI CHARACTERS DATA (Scenario-based Personality Analysis)
        =================================================================== */
-    const characters = [
+    const defaultCharacters = [
       {
         id: 'nahida',
         name: 'Nahida',
@@ -480,21 +493,19 @@
         element: 'DENDRO VISION',
         badgeBg: 'bg-emerald-600 text-white',
         icon: 'fa-leaf text-emerald-400',
-        scenario: "Nahida is a small archon, but she always helps her subjects for them to have a good life.",
-        targetTraits: ['kind', 'caring', 'helpful', 'wise'],
+        scenario: "Nahida is a small archon, but she always helps her subjects so they have a good life.",
         visualSvg: `
           <circle cx="100" cy="100" r="85" fill="#064e3b"/>
           <path d="M 35 75 Q 100 25 165 75 L 170 135 Q 100 150 30 135 Z" fill="#f0fdf4"/>
-          <path d="M 40 85 Q 30 115 45 145" stroke="#4ade80" stroke-width="8" stroke-linecap="round"/>
           <ellipse cx="100" cy="105" rx="38" ry="30" fill="#ffe4e6"/>
           <ellipse cx="83" cy="102" rx="7" ry="9" fill="#16a34a"/>
           <ellipse cx="117" cy="102" rx="7" ry="9" fill="#16a34a"/>
           <circle cx="85" cy="99" r="3" fill="#ffffff"/>
           <circle cx="119" cy="99" r="3" fill="#ffffff"/>
           <path d="M 93 116 Q 100 122 107 116" stroke="#15803d" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M 60 135 L 140 135 L 150 185 L 50 185 Z" fill="#ffffff"/>
-          <path d="M 75 135 L 100 160 L 125 135 Z" fill="#22c55e"/>
-        `
+        `,
+        clues: ['kind', 'caring', 'helpful'],
+        targetVocabulary: ['kind', 'caring', 'helpful', 'wise']
       },
       {
         id: 'klee',
@@ -504,24 +515,17 @@
         element: 'PYRO VISION',
         badgeBg: 'bg-red-500 text-white',
         icon: 'fa-fire text-red-500',
-        scenario: "Klee loves making new friends and playing everywhere with a big smile, but she always shares her toys.",
-        targetTraits: ['cheerful', 'playful', 'friendly', 'generous'],
+        scenario: "Klee loves making new friends and playing in the forest with a big smile on her face.",
         visualSvg: `
           <circle cx="100" cy="100" r="85" fill="#450a0a"/>
           <path d="M 30 75 Q 100 15 170 75 Z" fill="#dc2626"/>
-          <ellipse cx="100" cy="75" rx="72" ry="14" fill="#991b1b"/>
-          <circle cx="100" cy="50" r="10" fill="#fbbf24"/>
-          <path d="M 45 75 Q 100 40 155 75 L 160 120 Q 100 140 40 120 Z" fill="#fde047"/>
           <ellipse cx="100" cy="108" rx="40" ry="32" fill="#ffe4e6"/>
           <ellipse cx="82" cy="105" rx="7" ry="10" fill="#991b1b"/>
           <ellipse cx="118" cy="105" rx="7" ry="10" fill="#991b1b"/>
-          <circle cx="84" cy="102" r="3" fill="#ffffff"/>
-          <circle cx="120" cy="102" r="3" fill="#ffffff"/>
-          <circle cx="72" cy="114" r="5" fill="#fda4af"/>
-          <circle cx="128" cy="114" r="5" fill="#fda4af"/>
           <path d="M 93 118 Q 100 126 107 118" stroke="#dc2626" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M 65 140 Q 100 135 135 140 L 150 185 L 50 185 Z" fill="#dc2626"/>
-        `
+        `,
+        clues: ['friendly', 'cheerful', 'playful'],
+        targetVocabulary: ['friendly', 'cheerful', 'playful', 'happy']
       },
       {
         id: 'zhongli',
@@ -531,20 +535,16 @@
         element: 'GEO VISION',
         badgeBg: 'bg-yellow-600 text-white',
         icon: 'fa-shield-halved text-yellow-500',
-        scenario: "Zhongli stays calm during dangerous battles and always keeps his promises to his people.",
-        targetTraits: ['calm', 'wise', 'honest', 'reliable'],
+        scenario: "Zhongli speaks softly, reads many books, and always thinks carefully before making decisions.",
         visualSvg: `
           <circle cx="100" cy="100" r="85" fill="#291e07"/>
           <path d="M 40 75 Q 100 30 160 75 L 165 140 Q 100 155 35 140 Z" fill="#451a03"/>
-          <path d="M 100 130 L 100 165" stroke="#d97706" stroke-width="6" stroke-linecap="round"/>
           <ellipse cx="100" cy="102" rx="38" ry="30" fill="#ffe4e6"/>
           <ellipse cx="83" cy="99" rx="7" ry="9" fill="#d97706"/>
           <ellipse cx="117" cy="99" rx="7" ry="9" fill="#d97706"/>
-          <circle cx="85" cy="96" r="3" fill="#ffffff"/>
-          <circle cx="119" cy="96" r="3" fill="#ffffff"/>
-          <path d="M 94 113 L 106 113" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>
-          <path d="M 55 132 L 145 132 L 155 185 L 45 185 Z" fill="#78350f"/>
-        `
+        `,
+        clues: ['calm', 'wise', 'quiet'],
+        targetVocabulary: ['calm', 'wise', 'quiet', 'smart']
       },
       {
         id: 'venti',
@@ -554,79 +554,31 @@
         element: 'ANEMO VISION',
         badgeBg: 'bg-teal-500 text-white',
         icon: 'fa-wind text-teal-400',
-        scenario: "Venti sings joyful songs for everyone in Mondstadt and makes sad people smile.",
-        targetTraits: ['cheerful', 'friendly', 'creative', 'kind'],
+        scenario: "Venti plays his lyre, sings songs for everyone in the square, and makes people laugh.",
         visualSvg: `
           <circle cx="100" cy="100" r="85" fill="#042f2e"/>
           <ellipse cx="100" cy="55" rx="55" ry="22" fill="#0d9488"/>
-          <path d="M 45 80 Q 100 45 155 80 L 165 135 Q 100 150 35 135 Z" fill="#0f172a"/>
           <ellipse cx="100" cy="105" rx="38" ry="30" fill="#ffe4e6"/>
-          <ellipse cx="83" cy="102" rx="7" ry="9" fill="#0d9488"/>
-          <ellipse cx="117" cy="102" rx="7" ry="9" fill="#0d9488"/>
-          <path d="M 93 115 Q 100 122 107 115" stroke="#0f766e" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M 60 135 L 140 135 L 150 185 L 50 185 Z" fill="#0d9488"/>
-        `
+        `,
+        clues: ['cheerful', 'fun', 'creative'],
+        targetVocabulary: ['cheerful', 'fun', 'creative', 'friendly']
       },
       {
         id: 'raiden',
         name: 'Raiden Ei',
-        title: 'Electro Archon',
+        title: 'Almighty Ogosho',
         nation: 'Inazuma',
         element: 'ELECTRO VISION',
         badgeBg: 'bg-purple-600 text-white',
         icon: 'fa-bolt text-purple-400',
-        scenario: "Ei works hard every day to protect her nation from danger and keep them safe.",
-        targetTraits: ['strong', 'loyal', 'brave', 'protective'],
+        scenario: "Raiden Ei guards her nation bravely and protects her people from any danger.",
         visualSvg: `
           <circle cx="100" cy="100" r="85" fill="#3b0764"/>
-          <path d="M 35 75 Q 100 30 165 75 L 160 145 Q 100 160 40 145 Z" fill="#581c87"/>
+          <path d="M 35 75 Q 100 30 165 75 L 160 145 Z" fill="#581c87"/>
           <ellipse cx="100" cy="102" rx="38" ry="30" fill="#ffe4e6"/>
-          <ellipse cx="83" cy="99" rx="7" ry="9" fill="#9333ea"/>
-          <ellipse cx="117" cy="99" rx="7" ry="9" fill="#9333ea"/>
-          <path d="M 94 112 L 106 112" stroke="#581c87" stroke-width="3" stroke-linecap="round"/>
-          <path d="M 55 132 L 145 132 L 155 185 L 45 185 Z" fill="#7e22ce"/>
-        `
-      },
-      {
-        id: 'furina',
-        name: 'Furina',
-        title: 'Lady of Hydro',
-        nation: 'Fontaine',
-        element: 'HYDRO VISION',
-        badgeBg: 'bg-blue-600 text-white',
-        icon: 'fa-droplet text-blue-400',
-        scenario: "Furina performs on stage with great energy to bring joy and never gives up during tough times.",
-        targetTraits: ['energetic', 'brave', 'creative', 'stylish'],
-        visualSvg: `
-          <circle cx="100" cy="100" r="85" fill="#1e3a8a"/>
-          <path d="M 40 60 Q 100 15 160 60 Z" fill="#1d4ed8"/>
-          <path d="M 40 65 Q 100 35 160 65 L 165 130 Q 100 145 35 130 Z" fill="#eff6ff"/>
-          <ellipse cx="100" cy="105" rx="38" ry="30" fill="#ffe4e6"/>
-          <ellipse cx="83" cy="102" rx="7" ry="9" fill="#2563eb"/>
-          <ellipse cx="117" cy="102" rx="7" ry="9" fill="#60a5fa"/>
-          <path d="M 93 115 Q 100 121 107 115" stroke="#1d4ed8" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M 60 135 L 140 135 L 150 185 L 50 185 Z" fill="#1d4ed8"/>
-        `
-      },
-      {
-        id: 'kaveh',
-        name: 'Kaveh',
-        title: 'Renowned Architect',
-        nation: 'Sumeru',
-        element: 'DENDRO VISION',
-        badgeBg: 'bg-emerald-600 text-white',
-        icon: 'fa-compass-drafting text-emerald-400',
-        scenario: "Kaveh builds beautiful houses for poor people and always gives his money to those in need.",
-        targetTraits: ['generous', 'kind', 'creative', 'helpful'],
-        visualSvg: `
-          <circle cx="100" cy="100" r="85" fill="#14532d"/>
-          <path d="M 40 70 Q 100 30 160 70 L 165 135 Q 100 150 35 135 Z" fill="#fef08a"/>
-          <ellipse cx="100" cy="105" rx="38" ry="30" fill="#ffe4e6"/>
-          <ellipse cx="83" cy="102" rx="7" ry="9" fill="#ca8a04"/>
-          <ellipse cx="117" cy="102" rx="7" ry="9" fill="#ca8a04"/>
-          <path d="M 93 115 Q 100 121 107 115" stroke="#854d0e" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M 60 135 L 140 135 L 150 185 L 50 185 Z" fill="#15803d"/>
-        `
+        `,
+        clues: ['brave', 'strong', 'serious'],
+        targetVocabulary: ['brave', 'strong', 'serious', 'calm']
       },
       {
         id: 'mitya',
@@ -634,74 +586,94 @@
         title: 'Mysterious Traveler',
         nation: 'Snezhnaya',
         element: 'ANEMO VISION',
-        badgeBg: 'bg-cyan-600 text-white',
-        icon: 'fa-compass text-cyan-300',
-        scenario: "Mitya explores dangerous unknown ruins to save lost travelers and guide them home.",
-        targetTraits: ['brave', 'helpful', 'smart', 'caring'],
+        badgeBg: 'bg-sky-600 text-white',
+        icon: 'fa-compass text-sky-300',
+        scenario: "Mitya travels across Teyvat to learn new things and shares his snacks with lost children.",
         visualSvg: `
-          <circle cx="100" cy="100" r="85" fill="#0f172a"/>
-          <path d="M 40 70 Q 100 30 160 70 L 165 135 Q 100 150 35 135 Z" fill="#38bdf8"/>
-          <ellipse cx="100" cy="105" rx="38" ry="30" fill="#ffe4e6"/>
-          <ellipse cx="83" cy="102" rx="7" ry="9" fill="#0284c7"/>
-          <ellipse cx="117" cy="102" rx="7" ry="9" fill="#0284c7"/>
-          <path d="M 93 115 L 107 115" stroke="#0369a1" stroke-width="3" stroke-linecap="round"/>
-          <path d="M 60 135 L 140 135 L 150 185 L 50 185 Z" fill="#0284c7"/>
-        `
+          <circle cx="100" cy="100" r="85" fill="#0c4a6e"/>
+          <ellipse cx="100" cy="102" rx="38" ry="30" fill="#ffe4e6"/>
+        `,
+        clues: ['generous', 'curious', 'kind'],
+        targetVocabulary: ['generous', 'curious', 'kind', 'friendly']
       },
       {
-        id: 'columbina',
-        name: 'Columbina',
-        title: 'The Singing Maiden',
-        nation: 'Snezhnaya',
-        element: 'CRYO VISION',
-        badgeBg: 'bg-cyan-700 text-white',
-        icon: 'fa-feather text-pink-300',
-        scenario: "Columbina speaks softly to scared animals and gently takes care of sick birds.",
-        targetTraits: ['gentle', 'calm', 'kind', 'caring'],
+        id: 'furina',
+        name: 'Furina',
+        title: 'The Stage Star',
+        nation: 'Fontaine',
+        element: 'HYDRO VISION',
+        badgeBg: 'bg-blue-600 text-white',
+        icon: 'fa-droplet text-blue-400',
+        scenario: "Furina performs exciting shows on stage and always dresses nicely for her fans.",
         visualSvg: `
-          <circle cx="100" cy="100" r="85" fill="#312e81"/>
-          <path d="M 40 70 Q 100 30 160 70 L 165 135 Q 100 150 35 135 Z" fill="#e0e7ff"/>
+          <circle cx="100" cy="100" r="85" fill="#1e3a8a"/>
           <ellipse cx="100" cy="105" rx="38" ry="30" fill="#ffe4e6"/>
-          <ellipse cx="83" cy="102" rx="7" ry="9" fill="#4338ca"/>
-          <ellipse cx="117" cy="102" rx="7" ry="9" fill="#4338ca"/>
-          <path d="M 94 115 Q 100 120 106 115" stroke="#3730a3" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M 60 135 L 140 135 L 150 185 L 50 185 Z" fill="#4f46e5"/>
-        `
+        `,
+        clues: ['stylish', 'active', 'polite'],
+        targetVocabulary: ['stylish', 'active', 'polite', 'cheerful']
       },
       {
         id: 'lohen',
         name: 'Lohen',
-        title: 'Brave Scholar',
-        nation: 'Fontaine',
+        title: 'Brave Adventurer',
+        nation: 'Natlan',
         element: 'PYRO VISION',
         badgeBg: 'bg-orange-600 text-white',
-        icon: 'fa-book text-amber-300',
-        scenario: "Lohen studies late every night to solve difficult puzzles and help his classmates with homework.",
-        targetTraits: ['smart', 'hard-working', 'helpful', 'patient'],
+        icon: 'fa-shield text-orange-400',
+        scenario: "Lohen studies late every night so he can help his classmates pass their exams.",
         visualSvg: `
-          <circle cx="100" cy="100" r="85" fill="#431407"/>
-          <path d="M 40 70 Q 100 30 160 70 L 165 135 Q 100 150 35 135 Z" fill="#ea580c"/>
+          <circle cx="100" cy="100" r="85" fill="#7c2d12"/>
           <ellipse cx="100" cy="105" rx="38" ry="30" fill="#ffe4e6"/>
-          <ellipse cx="83" cy="102" rx="7" ry="9" fill="#9a3412"/>
-          <ellipse cx="117" cy="102" rx="7" ry="9" fill="#9a3412"/>
-          <path d="M 93 115 Q 100 121 107 115" stroke="#7c2d12" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M 60 135 L 140 135 L 150 185 L 50 185 Z" fill="#c2410c"/>
-        `
+        `,
+        clues: ['hard-working', 'helpful', 'smart'],
+        targetVocabulary: ['hard-working', 'helpful', 'smart', 'kind']
+      },
+      {
+        id: 'columbina',
+        name: 'Columbina',
+        title: 'Singing Maiden',
+        nation: 'Snezhnaya',
+        element: 'CRYO VISION',
+        badgeBg: 'bg-cyan-600 text-white',
+        icon: 'fa-snowflake text-cyan-300',
+        scenario: "Columbina speaks very softly and listens quietly whenever others share their stories.",
+        visualSvg: `
+          <circle cx="100" cy="100" r="85" fill="#164e63"/>
+          <ellipse cx="100" cy="105" rx="38" ry="30" fill="#ffe4e6"/>
+        `,
+        clues: ['quiet', 'gentle', 'polite'],
+        targetVocabulary: ['quiet', 'gentle', 'polite', 'calm']
+      },
+      {
+        id: 'kaveh',
+        name: 'Kaveh',
+        title: 'Renowned Architect',
+        nation: 'Sumeru',
+        element: 'DENDRO VISION',
+        badgeBg: 'bg-lime-600 text-white',
+        icon: 'fa-compass-drafting text-lime-300',
+        scenario: "Kaveh designs beautiful houses for poor families without asking for any money.",
+        visualSvg: `
+          <circle cx="100" cy="100" r="85" fill="#365314"/>
+          <ellipse cx="100" cy="105" rx="38" ry="30" fill="#ffe4e6"/>
+        `,
+        clues: ['generous', 'caring', 'helpful'],
+        targetVocabulary: ['generous', 'caring', 'helpful', 'creative']
       }
     ];
 
-    const positiveWordBank = [
-      'kind', 'caring', 'brave', 'smart', 'friendly', 'hard-working', 'helpful', 
-      'generous', 'cheerful', 'calm', 'honest', 'wise', 'polite', 'creative'
-    ];
-
-    const actionWordBank = [
-      'supportive', 'energetic', 'strong', 'patient', 'gentle', 'playful', 'noble', 'protective', 'reliable'
+    const easyPersonalityWords = [
+      'kind', 'caring', 'helpful', 'friendly', 'cheerful', 'playful', 'wise', 'calm',
+      'quiet', 'brave', 'strong', 'generous', 'curious', 'stylish', 'active', 'polite',
+      'hard-working', 'smart', 'gentle', 'creative'
     ];
 
     /* ===================================================================
-       2. GLOBAL APP STATE
+       2. LOCALSTORAGE INITIALIZATION
        =================================================================== */
+    let characters = JSON.parse(localStorage.getItem('teyvat_characters_data')) || defaultCharacters;
+    let uploadedCharacterImages = JSON.parse(localStorage.getItem('teyvat_char_photos')) || {};
+
     let currentCharacterIndex = 0;
     let primogems = 0;
     let isAudioEnabled = true;
@@ -714,14 +686,13 @@
     let roundsPlayed = 0;
 
     /* ===================================================================
-       3. WEB AUDIO SYNTHESIZER
+       3. AUDIO SYNTHESIZER
        =================================================================== */
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     function playSound(type) {
       if (!isAudioEnabled) return;
       if (audioCtx.state === 'suspended') audioCtx.resume();
-
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
       osc.connect(gain);
@@ -763,13 +734,15 @@
     }
 
     /* ===================================================================
-       4. INITIALIZATION & RENDERING
+       4. UI RENDERING & CHARACTERS
        =================================================================== */
     window.addEventListener('DOMContentLoaded', () => {
+      loadSavedAppBackground();
       renderTabs();
       initWordBank();
       initSpeechRecognition();
       renderCharacter(0);
+      renderInfographicsCharts();
     });
 
     function renderTabs() {
@@ -786,17 +759,10 @@
     }
 
     function initWordBank() {
-      const posContainer = document.getElementById('positiveTraitsContainer');
-      posContainer.innerHTML = positiveWordBank.map(w => `
-        <button onclick="insertWord('${w}')" class="px-2.5 py-1 rounded-full bg-slate-800 hover:bg-slate-700 border border-emerald-500/50 hover:border-emerald-400 text-xs font-chibi text-emerald-200 transition">
-          + ${w}
-        </button>
-      `).join('');
-
-      const actContainer = document.getElementById('actionTraitsContainer');
-      actContainer.innerHTML = actionWordBank.map(w => `
-        <button onclick="insertWord('${w}')" class="px-2.5 py-1 rounded-full bg-slate-800 hover:bg-slate-700 border border-purple-500/50 hover:border-purple-400 text-xs font-chibi text-purple-200 transition">
-          + ${w}
+      const container = document.getElementById('wordBankContainer');
+      container.innerHTML = easyPersonalityWords.map(word => `
+        <button onclick="insertWord('${word}')" class="px-2.5 py-1 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-genshin-gold text-xs font-chibi text-slate-200 transition">
+          + ${word}
         </button>
       `).join('');
     }
@@ -825,66 +791,52 @@
       showCharacterImage(index);
 
       const traitBox = document.getElementById('traitBadgeContainer');
-      traitBox.innerHTML = char.targetTraits.map(t => `
+      traitBox.innerHTML = char.clues.map(c => `
         <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-chibi font-bold text-amber-300">
-          ✨ ${t}
+          ✨ ${c}
         </span>
       `).join('');
 
       document.getElementById('paimonSpeech').innerHTML = 
-        `"Read <strong>${char.name}'s</strong> scenario story! Tell Paimon what personality traits best describe them!"`;
+        `"Read the scenario for <strong>${char.name}</strong>! What personality traits match their actions?"`;
     }
 
     /* ===================================================================
-       CARD & STORY EDITOR
+       5. LOCALSTORAGE PHOTO & BACKGROUND HANDLERS
        =================================================================== */
-    function toggleCardEditor() {
+    function loadSavedAppBackground() {
+      const savedBg = localStorage.getItem('teyvat_app_bg');
+      if (savedBg) applyAppBackground(savedBg);
+    }
+
+    document.getElementById('bgImageUpload').addEventListener('change', (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result;
+        applyAppBackground(base64);
+        localStorage.setItem('teyvat_app_bg', base64);
+        playSound('success');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function applyAppBackground(imgData) {
+      const container = document.getElementById('backdropContainer');
+      container.style.backgroundImage = `url('${imgData}')`;
+      container.style.backgroundSize = 'cover';
+      container.style.backgroundPosition = 'center';
+      Array.from(container.children).forEach(c => c.style.opacity = '0');
+    }
+
+    function resetAppBackground() {
+      const container = document.getElementById('backdropContainer');
+      container.style.backgroundImage = 'none';
+      Array.from(container.children).forEach(c => c.style.opacity = '');
+      localStorage.removeItem('teyvat_app_bg');
       playSound('click');
-      const form = document.getElementById('cardEditorForm');
-      const isHidden = form.classList.contains('hidden');
-      
-      if (isHidden) {
-        const char = characters[currentCharacterIndex];
-        document.getElementById('editNameInput').value = char.name;
-        document.getElementById('editTitleInput').value = char.title;
-        document.getElementById('editNationInput').value = char.nation;
-        document.getElementById('editScenarioInput').value = char.scenario;
-        document.getElementById('editTraitsInput').value = char.targetTraits.join(', ');
-        form.classList.remove('hidden');
-      } else {
-        form.classList.add('hidden');
-      }
     }
-
-    function saveCardEdits() {
-      playSound('success');
-      const char = characters[currentCharacterIndex];
-      
-      const newName = document.getElementById('editNameInput').value.trim();
-      const newTitle = document.getElementById('editTitleInput').value.trim();
-      const newNation = document.getElementById('editNationInput').value.trim();
-      const newScenario = document.getElementById('editScenarioInput').value.trim();
-      const newTraitsRaw = document.getElementById('editTraitsInput').value.trim();
-
-      if (newName) char.name = newName;
-      if (newTitle) char.title = newTitle;
-      if (newNation) char.nation = newNation;
-      if (newScenario) char.scenario = newScenario;
-
-      if (newTraitsRaw) {
-        const updated = newTraitsRaw.split(',').map(t => t.trim().toLowerCase()).filter(t => t);
-        if (updated.length > 0) char.targetTraits = updated;
-      }
-
-      renderTabs();
-      renderCharacter(currentCharacterIndex);
-      document.getElementById('cardEditorForm').classList.add('hidden');
-    }
-
-    /* ===================================================================
-       IMAGE & BACKDROP UPLOAD
-       =================================================================== */
-    const uploadedCharacterImages = {};
 
     function showCharacterImage(index) {
       const photo = document.getElementById('characterPhoto');
@@ -907,7 +859,9 @@
       if (!file) return;
       const reader = new FileReader();
       reader.onload = () => {
-        uploadedCharacterImages[currentCharacterIndex] = reader.result;
+        const base64 = reader.result;
+        uploadedCharacterImages[currentCharacterIndex] = base64;
+        localStorage.setItem('teyvat_char_photos', JSON.stringify(uploadedCharacterImages));
         showCharacterImage(currentCharacterIndex);
         playSound('success');
       };
@@ -917,48 +871,121 @@
 
     document.getElementById('resetCharacterImage').addEventListener('click', () => {
       delete uploadedCharacterImages[currentCharacterIndex];
+      localStorage.setItem('teyvat_char_photos', JSON.stringify(uploadedCharacterImages));
       showCharacterImage(currentCharacterIndex);
       playSound('click');
     });
 
-    const bgInput = document.getElementById('bgImageUpload');
-    const backdropContainer = document.getElementById('backdropContainer');
-
-    bgInput.addEventListener('change', (event) => {
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        backdropContainer.style.backgroundImage = `url('${reader.result}')`;
-        backdropContainer.style.backgroundSize = 'cover';
-        backdropContainer.style.backgroundPosition = 'center';
-
-        Array.from(backdropContainer.children).forEach(c => c.style.opacity = '0');
-        playSound('success');
-      };
-      reader.readAsDataURL(file);
-      event.target.value = '';
-    });
-
-    function resetAppBackground() {
-      backdropContainer.style.backgroundImage = 'none';
-      Array.from(backdropContainer.children).forEach(c => c.style.opacity = '');
+    /* ===================================================================
+       6. EDITABLE CARD DETAILS
+       =================================================================== */
+    function toggleCardEditor() {
       playSound('click');
+      const form = document.getElementById('cardEditorForm');
+      if (form.classList.contains('hidden')) {
+        const char = characters[currentCharacterIndex];
+        document.getElementById('editNameInput').value = char.name;
+        document.getElementById('editScenarioInput').value = char.scenario;
+        document.getElementById('editTraitsInput').value = char.clues.join(', ');
+        form.classList.remove('hidden');
+      } else {
+        form.classList.add('hidden');
+      }
+    }
+
+    function saveCardEdits() {
+      playSound('success');
+      const char = characters[currentCharacterIndex];
+      const name = document.getElementById('editNameInput').value.trim();
+      const scenario = document.getElementById('editScenarioInput').value.trim();
+      const traitsRaw = document.getElementById('editTraitsInput').value.trim();
+
+      if (name) char.name = name;
+      if (scenario) char.scenario = scenario;
+      if (traitsRaw) {
+        const updated = traitsRaw.split(',').map(t => t.trim().toLowerCase()).filter(t => t);
+        if (updated.length > 0) char.clues = updated;
+      }
+
+      localStorage.setItem('teyvat_characters_data', JSON.stringify(characters));
+      renderTabs();
+      renderCharacter(currentCharacterIndex);
+      document.getElementById('cardEditorForm').classList.add('hidden');
     }
 
     /* ===================================================================
-       5. SPEECH ENGINE & INPUT HELPERS
+       7. INFOGRAPHICS HANDBOOK & EDITING
+       =================================================================== */
+    let infographicsData = JSON.parse(localStorage.getItem('teyvat_infographics')) || {
+      appearance: ['short hair', 'long hair', 'blue eyes', 'red hat', 'black dress', 'tall', 'small'],
+      personality: ['kind', 'caring', 'helpful', 'friendly', 'cheerful', 'brave', 'smart', 'quiet']
+    };
+
+    function openInfographicsModal() {
+      playSound('click');
+      document.getElementById('infographicsModal').classList.remove('hidden');
+    }
+
+    function closeInfographicsModal() {
+      playSound('click');
+      document.getElementById('infographicsModal').classList.add('hidden');
+    }
+
+    function renderInfographicsCharts() {
+      const appContainer = document.getElementById('appearanceChartContent');
+      const persContainer = document.getElementById('personalityChartContent');
+
+      appContainer.innerHTML = `
+        <p class="text-slate-300">Describing features, clothes, and hair (A1):</p>
+        <div class="flex flex-wrap gap-1.5 mt-2">
+          ${infographicsData.appearance.map(w => `<span class="px-2.5 py-1 rounded-full bg-sky-950 border border-sky-400 text-sky-200 font-bold">${w}</span>`).join('')}
+        </div>
+      `;
+
+      persContainer.innerHTML = `
+        <p class="text-slate-300">Describing actions, feelings, and virtues (A1):</p>
+        <div class="flex flex-wrap gap-1.5 mt-2">
+          ${infographicsData.personality.map(w => `<span class="px-2.5 py-1 rounded-full bg-amber-950 border border-amber-400 text-amber-200 font-bold">${w}</span>`).join('')}
+        </div>
+      `;
+    }
+
+    function toggleInfographicsEditor() {
+      playSound('click');
+      const form = document.getElementById('infographicsEditForm');
+      if (form.classList.contains('hidden')) {
+        document.getElementById('editAppearanceWordsInput').value = infographicsData.appearance.join(', ');
+        document.getElementById('editPersonalityWordsInput').value = infographicsData.personality.join(', ');
+        form.classList.remove('hidden');
+      } else {
+        form.classList.add('hidden');
+      }
+    }
+
+    function saveInfographicsEdits() {
+      playSound('success');
+      const appRaw = document.getElementById('editAppearanceWordsInput').value.trim();
+      const persRaw = document.getElementById('editPersonalityWordsInput').value.trim();
+
+      if (appRaw) infographicsData.appearance = appRaw.split(',').map(s => s.trim()).filter(s => s);
+      if (persRaw) infographicsData.personality = persRaw.split(',').map(s => s.trim()).filter(s => s);
+
+      localStorage.setItem('teyvat_infographics', JSON.stringify(infographicsData));
+      renderInfographicsCharts();
+      document.getElementById('infographicsEditForm').classList.add('hidden');
+    }
+
+    /* ===================================================================
+       8. SPEECH ENGINE
        =================================================================== */
     function initSpeechRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const statusElement = document.getElementById('micStatus');
-
       if (!SpeechRecognition) {
         statusElement.className = 'text-xs px-3 py-1 rounded-full bg-amber-900/60 text-amber-300 border border-amber-600 font-chibi';
         statusElement.innerHTML = `<i class="fa-solid fa-keyboard"></i> Typing Mode`;
         return;
       }
-
       recognition = new SpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = true;
@@ -981,19 +1008,16 @@
         document.getElementById('speechTextInput').value = transcript;
       };
 
-      recognition.onend = () => stopRecording();
+      recognition.onend = () => { stopRecording(); };
     }
 
     function toggleSpeechRecognition() {
       if (!recognition) {
-        alert("Speech input isn't supported on this browser. You can type your sentence in the box!");
+        alert("Type your sentence into the text box below!");
         return;
       }
-      if (isRecording) {
-        recognition.stop();
-      } else {
-        try { recognition.start(); } catch(e) { console.error(e); }
-      }
+      if (isRecording) recognition.stop();
+      else try { recognition.start(); } catch(e) { console.error(e); }
     }
 
     function stopRecording() {
@@ -1025,33 +1049,33 @@
     }
 
     /* ===================================================================
-       6. TRAIT ANALYSIS EVALUATION ENGINE
+       9. EVALUATION ENGINE
        =================================================================== */
     function evaluateSpeech() {
       const char = characters[currentCharacterIndex];
       const text = document.getElementById('speechTextInput').value.trim().toLowerCase();
 
       if (!text) {
-        alert("Please speak or type a sentence describing their personality first!");
+        alert("Please speak or type a sentence first!");
         return;
       }
 
-      const validStarters = ['she is', 'he is', 'they are', 'she acts', 'he acts', 'is'];
+      const validStarters = ['she is', 'he is', 'they are', 'is', 'are'];
       const hasStructure = validStarters.some(s => text.includes(s));
 
-      let matchedTraitsCount = 0;
-      const detectedBadges = char.targetTraits.map(trait => {
-        const isMatched = text.includes(trait);
-        if (isMatched) matchedTraitsCount++;
-        return { text: trait, matched: isMatched };
+      let matchedCluesCount = 0;
+      const detectedBadges = char.clues.map(clue => {
+        const isMatched = text.includes(clue);
+        if (isMatched) matchedCluesCount++;
+        return { text: clue, matched: isMatched };
       });
 
       roundsPlayed++;
-      totalMatches += matchedTraitsCount;
-      totalPossible += char.targetTraits.length;
+      totalMatches += matchedCluesCount;
+      totalPossible += char.clues.length;
       if (hasStructure) totalSentences++;
 
-      let earnedPrimos = 30 + (matchedTraitsCount * 20);
+      let earnedPrimos = 30 + (matchedCluesCount * 20);
       primogems += earnedPrimos;
       document.getElementById('primoDisplay').textContent = primogems;
 
@@ -1068,17 +1092,16 @@
       `).join('');
 
       const feedback = document.getElementById('structureFeedback');
-      if (hasStructure && matchedTraitsCount > 0) {
+      if (hasStructure && matchedCluesCount > 0) {
         playSound('success');
-        feedback.innerHTML = `🌟 <strong>Great Job!</strong> You analyzed <strong>${char.name}'s</strong> behavior and correctly identified their personality!`;
+        feedback.innerHTML = `🌟 <strong>Great job!</strong> You correctly analyzed <strong>${char.name}</strong>'s personality!`;
       } else if (hasStructure) {
-        feedback.innerHTML = `👍 <strong>Good sentence structure!</strong> Read the scenario again and pick words like <em>kind, brave, or smart</em>!`;
+        feedback.innerHTML = `👍 <strong>Good sentence structure!</strong> Pick personality adjectives from the scenario!`;
       } else {
-        feedback.innerHTML = `💡 <strong>Tip:</strong> Try starting your answer with <strong>"She is..."</strong> or <strong>"He is..."</strong>!`;
+        feedback.innerHTML = `💡 <strong>Tip:</strong> Start your sentence with <strong>"She is..."</strong> or <strong>"He is..."</strong>!`;
       }
 
       document.getElementById('rewardDetails').textContent = `+${earnedPrimos} Primogems ⭐`;
-      document.getElementById('paimonSpeech').innerHTML = `"Awesome analysis! You earned <strong>${earnedPrimos} Primogems</strong>!"`;
     }
 
     function nextCharacter() {
@@ -1087,7 +1110,7 @@
     }
 
     /* ===================================================================
-       7. CERTIFICATE MODAL
+       10. CERTIFICATE MODAL
        =================================================================== */
     function openReportModal() {
       playSound('click');
@@ -1105,11 +1128,11 @@
       if (vocabScore >= 60 && sentenceScore >= 60) {
         badge.className = 'text-xs font-chibi font-bold px-3 py-1 rounded-full bg-emerald-900 text-emerald-300 border border-emerald-500 inline-block mb-2';
         badge.textContent = 'MASTER PERSONALITY ANALYST! ⭐';
-        summary.textContent = 'Fantastic work! You can read story scenarios and accurately analyze personality traits using full statements!';
+        summary.textContent = 'Awesome! You can analyze personality traits accurately using complete sentences!';
       } else {
         badge.className = 'text-xs font-chibi font-bold px-3 py-1 rounded-full bg-amber-900 text-amber-300 border border-amber-500 inline-block mb-2';
         badge.textContent = 'JUNIOR ANALYST 🌟';
-        summary.textContent = 'Good effort! Keep practicing sentence starters like "She is..." and identifying personality adjectives.';
+        summary.textContent = 'Good try! Keep matching actions to personality words like "kind", "caring", and "helpful".';
       }
     }
 
